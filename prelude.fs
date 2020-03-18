@@ -92,7 +92,7 @@ module String =
 
   let inline endsWith (s: ^a) (str: ^String) : bool = (^String: (member EndsWith: ^a -> bool) str, s)
 
-  let inline contains s (str: string) = str.Contains s
+  let inline contains (s: string) (str: string) = str.Contains s
 
   let inline findIndex (q: ^T) (str: ^String) = 
     (^String: (member IndexOf: ^T -> int) (str, q))

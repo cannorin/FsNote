@@ -3,8 +3,6 @@
 open System
 open Markdig
 open FSharp.CommandLine
-open FSharp.CommandLine.Commands
-open FSharp.CommandLine.Options
 open System.IO
 open System.Text.RegularExpressions;
 open Markdig.Syntax
@@ -72,18 +70,17 @@ let rec mainCommand () =
   command {
     name "fsnote"
     description "Generates HTML or Markdown from ASCIIMath-extended markdown."
-    let! tf = templateOption() |> CommandOptionUtils.zeroOrExactlyOne
-    let! ot = outputTypeOption() |> CommandOptionUtils.zeroOrExactlyOne |> CommandOptionUtils.whenMissingUse OHtml
-    let! prefix = outputDirectoryOption() |> CommandOptionUtils.zeroOrExactlyOne |> CommandOptionUtils.whenMissingUse ""
+    opt tf in templateOption() |> CommandOption.zeroOrExactlyOne
+    opt ot in outputTypeOption() |> CommandOption.zeroOrExactlyOne |> CommandOption.whenMissingUse OHtml
+    opt prefix in outputDirectoryOption() |> CommandOption.zeroOrExactlyOne |> CommandOption.whenMissingUse ""
 
-    let! escapesUnderscore = escapeUnderscoreOption() |> CommandOptionUtils.zeroOrExactlyOne |> CommandOptionUtils.whenMissingUse false
+    opt escapesUnderscore in escapeUnderscoreOption() |> CommandOption.zeroOrExactlyOne |> CommandOption.whenMissingUse false
 
     let templateHtml =
       tf |> Option.map (fun x -> File.ReadAllText(x))
          |> Option.defaultValue defaultHtmlTemplate
-    preprocess
 
-    do! CommandUtils.failOnUnknownOptions
+    do! Command.failOnUnknownOptions()
     let! args = Command.args
     do
       if args |> List.isEmpty then
