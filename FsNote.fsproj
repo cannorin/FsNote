@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ASCIIMath2TeX.Net" Version="1.0.20181029" />
+    <PackageReference Include="ASCIIMath2TeX.Net" Version="1.0.*" />
     <PackageReference Include="FSharp.CommandLine" Version="3.2.3671.6874" />
     <PackageReference Include="Markdig" Version="0.18.3" />
   </ItemGroup>

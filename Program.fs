@@ -7,12 +7,11 @@ open System.IO
 open System.Text.RegularExpressions;
 open Markdig.Syntax
 open Markdig.Renderers
+open Pchp.Core
 
 let am2tex (code: string) =
-  use ctx = Pchp.Core.Context.CreateEmpty() in
-  Pchp.Core.Context.AddScriptReference(typeof<AMtoTeX>.Assembly);
-  let am2t = ctx.Create(RuntimeTypeHandle(), Pchp.Core.Reflection.PhpTypeInfoExtension.GetPhpTypeInfo<AMtoTeX>())
-  (am2t :?> AMtoTeX).convert(Pchp.Core.PhpValue.Create(code)).ToString()
+  let am2t = new AMtoTeX()
+  am2t.convert(PhpValue.Create(code)).ToString()
 
 let inline processMath escape (text: string) =
   let regex = new Regex(@"@(?<text>(?:[^@\\]|\\.)*)@", RegexOptions.Compiled)
