@@ -23,6 +23,7 @@
     <PackageReference Include="ASCIIMath2TeX.Net" Version="1.0.20200319" />
     <PackageReference Include="FSharp.CommandLine" Version="3.2.3671.6874" />
     <PackageReference Include="Markdig" Version="0.18.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
 </Project>
